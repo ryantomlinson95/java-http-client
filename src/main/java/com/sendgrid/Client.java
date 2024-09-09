@@ -27,6 +27,8 @@ import org.apache.hc.client5.http.classic.methods.HttpPut;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 
+import com.sun.jndi.toolkit.url.Uri;
+
 
 /**
  * Class Client allows for quick and easy access any REST or REST-like API.
@@ -97,7 +99,6 @@ public class Client implements Closeable {
 	 */
 	public URI buildUri(String baseUri, String endpoint, Map<String, String> queryParams) throws URISyntaxException {
 		URIBuilder builder = new URIBuilder();
-		URI uri;
 
 		if (this.test) {
 			builder.setScheme("http");
@@ -124,8 +125,7 @@ public class Client implements Closeable {
 				}
 			}
 		}
-		uri = builder.build();
-		return uri;
+		return builder.build();
 	}
 
 
@@ -167,11 +167,8 @@ public class Client implements Closeable {
 	 * @return the response object
 	 */
 	public Response get(Request request) throws URISyntaxException, IOException {
-		URI uri;
-		HttpGet httpGet;
-
-		uri = buildUri(request.getBaseUri(), request.getEndpoint(), request.getQueryParams());
-		httpGet = new HttpGet(uri.toString());
+		URI uri = buildUri(request.getBaseUri(), request.getEndpoint(), request.getQueryParams());
+		HttpGet httpGet = new HttpGet(uri.toString());
 
 		if (request.getHeaders() != null) {
 			for (Map.Entry<String, String> entry : request.getHeaders().entrySet()) {
@@ -195,11 +192,8 @@ public class Client implements Closeable {
 	 * @return the response object
 	 */
 	public Response post(Request request) throws URISyntaxException, IOException {
-		URI uri;
-		HttpPost httpPost;
-
-		uri = buildUri(request.getBaseUri(), request.getEndpoint(), request.getQueryParams());
-		httpPost = new HttpPost(uri.toString());
+		URI uri = buildUri(request.getBaseUri(), request.getEndpoint(), request.getQueryParams());
+		HttpPost httpPost = new HttpPost(uri.toString());
 
 		if (request.getHeaders() != null) {
 			for (Map.Entry<String, String> entry : request.getHeaders().entrySet()) {
@@ -227,11 +221,8 @@ public class Client implements Closeable {
 	 * @return the response object
 	 */
 	public Response patch(Request request) throws URISyntaxException, IOException {
-		URI uri;
-		HttpPatch httpPatch;
-
-		uri = buildUri(request.getBaseUri(), request.getEndpoint(), request.getQueryParams());
-		httpPatch = new HttpPatch(uri.toString());
+		URI uri = buildUri(request.getBaseUri(), request.getEndpoint(), request.getQueryParams());
+		HttpPatch httpPatch = new HttpPatch(uri.toString());
 
 		if (request.getHeaders() != null) {
 			for (Map.Entry<String, String> entry : request.getHeaders().entrySet()) {
@@ -259,11 +250,8 @@ public class Client implements Closeable {
 	 * @return the response object
 	 */
 	public Response put(Request request) throws URISyntaxException, IOException {
-		URI uri;
-		HttpPut httpPut;
-
-		uri = buildUri(request.getBaseUri(), request.getEndpoint(), request.getQueryParams());
-		httpPut = new HttpPut(uri.toString());
+		URI uri = buildUri(request.getBaseUri(), request.getEndpoint(), request.getQueryParams());
+		HttpPut httpPut = new HttpPut(uri.toString());
 
 		if (request.getHeaders() != null) {
 			for (Map.Entry<String, String> entry : request.getHeaders().entrySet()) {
@@ -290,11 +278,8 @@ public class Client implements Closeable {
 	 * @return the response object
 	 */
 	public Response delete(Request request) throws URISyntaxException, IOException {
-		URI uri;
-		BasicClassicHttpRequest httpDelete;
-
-		uri = buildUri(request.getBaseUri(), request.getEndpoint(), request.getQueryParams());
-		httpDelete = new BasicClassicHttpRequest("DELETE", uri.toString());
+		URI uri = buildUri(request.getBaseUri(), request.getEndpoint(), request.getQueryParams());
+		BasicClassicHttpRequest httpDelete = new BasicClassicHttpRequest("DELETE", uri.toString());
 
 		if (request.getHeaders() != null) {
 			for (Map.Entry<String, String> entry : request.getHeaders().entrySet()) {
